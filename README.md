@@ -31,3 +31,10 @@ The trade-off: we parse with a hand-rolled tokenizer rather than `ipaddress.ip_n
 ```
 PYTHONPATH=src python -m unittest discover -s tests
 ```
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
